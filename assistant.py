@@ -1,5 +1,7 @@
 import speech_recognition as sr
 import pyttsx3
+import pywhatkit
+import datetime
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -28,7 +30,12 @@ def run_karen():
     command = take_command()
     print(command)
     if "play" in command:
-        talk("playing")
-        print("playing")
+        song = command.replace("play", "")
+        talk("playing" + song)
+        pywhatkit.playonyt(song)
+    elif "time" in command:
+        time = datetime.datetime.now().strftime("%I:%M %p")
+        print(time)
+        talk("The Time is" + time)
         
 run_karen()
